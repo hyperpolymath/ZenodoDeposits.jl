@@ -505,7 +505,7 @@ end
     end
     # The client refuses to send the token anywhere but the Zenodo API.
     @test_throws ArgumentError ZenodoDeposits._request(c, "GET", "https://example.org/api/x")
-    @test_throws RemoteError ZenodoDeposits._bucket(c, Dict("links" => Dict("bucket" => "https://evil.example/api/files/00000000-0000-4000-8000-000000000001")))
+    @test_throws RemoteError ZenodoDeposits._bucket(c, Dict("links" => Dict("bucket" => "https://evil.example/api/files/00000000-0000-7000-8000-000000000001")))
 end
 
 @testset "tokens: real HTTP stack logs nothing sensitive" begin
