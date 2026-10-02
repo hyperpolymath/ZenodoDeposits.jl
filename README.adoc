@@ -1,0 +1,93 @@
+// SPDX-License-Identifier: CC-BY-SA-4.0
+// Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+// SPDX-FileCopyrightText: 2024-2026 Jonathan D.A. Jewell (hyperpolymath)
+= ZenodoDeposits.jl
+:toc:
+:toc-placement: preamble
+
+// ── Licensing ───────────────────────────────────────────────────────────────
+image:https://img.shields.io/badge/Code-MPL--2.0-blue.svg?logo=mozilla[Code licence: MPL-2.0,link="https://opensource.org/licenses/MPL-2.0"]
+image:https://img.shields.io/badge/Docs-CC--BY--SA--4.0-blue.svg?logo=creativecommons[Docs licence: CC-BY-SA-4.0,link="https://creativecommons.org/licenses/by-sa/4.0/"]
+image:https://github.com/hyperpolymath/ZenodoDeposits.jl/actions/workflows/julia-test.yml/badge.svg?branch=main[Julia Test Gate,link="https://github.com/hyperpolymath/ZenodoDeposits.jl/actions/workflows/julia-test.yml"]
+
+Reproducible, resumable Zenodo deposits and DOI minting from Julia (MPL-2.0).
+
+== What it does
+
+`ZenodoDeposits` uploads a directory of files to Zenodo and mints a DOI for it.
+A deposit has two phases, and both can be resumed after a crash:
+
+. `deposit!(journal, bundle; env=:sandbox)` creates a draft with a reserved
+  DOI, uploads every file and checks the remote checksums against the bundle.
+  Running it again continues where it stopped and never creates a second
+  deposition.
+. `publish!(journal; confirm=true)` publishes the checked draft and returns
+  the DOI. Publication is permanent. The publish request is never sent
+  twice: if a reply is lost, the journal records that the outcome is unknown,
+  and later calls only read Zenodo to find out what happened.
+
+The journal changes state only through one transition table. Agda proofs
+generated from that table show three properties: no run sends two publish
+requests, resuming never sends a publish again, and `published` is terminal.
+See link:proofs/agda/README.adoc[proofs/agda].
+
+== Safety defaults
+
+* *Sandbox first.* `env=:sandbox` is the default. Production needs an explicit
+  `env=:production`, or `--production` on the command line.
+* *Tokens only from the environment.* Tokens are read from
+  `ZENODO_SANDBOX_TOKEN` / `ZENODO_TOKEN` or `~/.netrc` (mode 0600). They are
+  never written to a journal or bundle, and they print as `[REDACTED]`. No
+  HTTP response body is carried in an error.
+* *Rate limits.* 429 and 503 responses are retried with bounded exponential
+  backoff that honours `Retry-After`.
+* *Pinned API.* The legacy deposition v1 endpoints (`/api/deposit/depositions`).
+
+== Quick start
+
+[source,julia]
+----
+using Pkg; Pkg.add(url = "https://github.com/hyperpolymath/ZenodoDeposits.jl")
+using ZenodoDeposits
+
+bundle  = write_checksums!(build_bundle("results/"; metadata = "metadata.json"))
+journal = open_journal("results.zenodo-journal")
+deposit!(journal, bundle)               # sandbox; safe to re-run
+doi = publish!(journal; confirm = true)  # permanent
+----
+
+From the shell:
+
+[source,sh]
+----
+bin/zenodo-deposit results/ --metadata metadata.json [--sandbox|--production] [--publish --yes]
+----
+
+The full walkthrough is in the documentation (`docs/src/quickstart.md`).
+
+== Development
+
+[source,sh]
+----
+julia --project -e 'using Pkg; Pkg.test()'   # mocked HTTP, crash-resume, Aqua, JET
+proofs/agda/check.sh                          # Agda 2.6.4.3 + agda-stdlib 2.1
+julia --project=docs docs/make.jl             # Documenter
+----
+
+The live Zenodo sandbox test is opt-in. It runs only with `ZENODO_LIVE_TEST=1`
+and a sandbox token, and otherwise reports itself as skipped (broken), not
+passed.
+
+== Status
+
+Version 0.1.0, not registered. The code was extracted from MetaManifold-WebUI
+`src/doi/`, with everything MetaManifold-specific removed. The repository
+scaffolding comes from `rsr-julia-library-template-repo`. Some inherited
+estate files (`.machine_readable/contractiles/`, `EXPLAINME.adoc`,
+`AFFIRMATION.adoc`) still describe the template.
+
+== Licence
+
+Code, configuration and scripts are link:LICENSE[Mozilla Public License 2.0]
+(`MPL-2.0`); prose documentation is `CC-BY-SA-4.0`. Per-file
+`SPDX-License-Identifier` headers are authoritative.

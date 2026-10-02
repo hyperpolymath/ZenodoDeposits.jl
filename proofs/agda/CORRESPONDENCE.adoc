@@ -1,0 +1,81 @@
+// SPDX-License-Identifier: MPL-2.0
+= Correspondence between the Julia journal and the Agda model
+
+== One table, two renderings
+
+`src/transitions.jl` defines `TRANSITIONS`, a map
+`(state, action, outcome) => (next, events)`, and `transition`, which looks a
+triple up and returns `(state, [])` for any triple that is not listed.
+`render_agda_transitions()` prints the same table as the Agda function
+`step : State → Action → Outcome → State × List Event`. Unlisted triples
+become the catch-all clause `step s _ _ = s , []`. The test set "Agda model
+is generated from this table" compares the committed `Transitions.agda` with a
+fresh rendering byte for byte, so the proofs cannot drift from the code.
+
+[cols="1,1"]
+|===
+| Julia | Agda
+
+| `:empty`, `:create_uncertain`, `:draft`, `:uploaded`, `:publish_uncertain`, `:published`
+| `empty`, `create-uncertain`, `draft`, `uploaded`, `publish-uncertain`, `published`
+
+| actions `:create`, `:recover`, `:upload`, `:publish`, `:reconcile`
+| `create`, `recover`, `upload`, `publish`, `reconcile`
+
+| outcomes `:ok`, `:rejected`, `:ambiguous`
+| `ok`, `rejected`, `ambiguous`
+
+| events `:sent_create`, `:sent_publish`, `:minted`
+| `sent-create`, `sent-publish`, `minted`
+
+| `transition(state, action, outcome)`
+| `step state action outcome`
+|===
+
+== Failure and retry
+
+A *rejected* outcome is a definite failure: Zenodo answered with a 4xx, or a
+local check failed. Each such triple maps back to its own state with no
+events, so retrying is just the same action again. An *ambiguous* outcome
+(crash, timeout, 5xx, or a lost response) of `create` or `publish` moves to
+the matching `*-uncertain` state. The table lets only the reading actions
+`recover` and `reconcile` out of those states.
+
+== How a Julia run is a trace
+
+The journal (`src/journal.jl`) changes its persisted `state` only in
+`_settle!` and `_write_ahead!`, and both compute the new state with
+`transition`. Before sending a create or publish request, `_write_ahead!`
+persists `transition(s, a, :ambiguous)`. When the reply arrives, `_settle!`
+applies `transition(s, a, :ok)` or `transition(s, a, :rejected)` to the state
+*before* the write-ahead record. A crash between the two leaves exactly the
+ambiguous successor on disk. Every persisted state is therefore `fin s₀ t`
+for a trace `t` of the model. Resuming from disk is continuing that trace,
+which is what `fin-++` and `evs-++` state.
+
+Each journal history entry records `(from, action, outcome)`, with
+`write_ahead` entries standing for the `ambiguous` outcome. The test
+"every transition is exercised through the journal" checks that the test runs together cover
+every triple in `TRANSITIONS`.
+
+== What the theorems mean for the code
+
+* `at-most-one-publish`: from any state, no sequence of journal operations
+  sends two publish requests. Neither does any number of crashes and
+  re-runs, because each re-run continues the same trace.
+* `resume-never-republishes`, `no-publish-after-publish-uncertain`: once a
+  publish request has been sent (or may have been), only reads follow.
+* `published-terminal`, `published-stays`, `published-silent`: a published
+  journal never changes again.
+
+== Outside the model
+
+The model does not cover:
+
+* that the HTTP layer actually sends one request per `publish` action. The
+  fake-Zenodo tests count POSTs for this;
+* that the files are written atomically and locked. `atomic_write` and
+  `with_lock` provide this and the crash-resume tests exercise it;
+* Zenodo's own behaviour.
+
+Two concurrent processes on one journal are serialised by the journal lock.

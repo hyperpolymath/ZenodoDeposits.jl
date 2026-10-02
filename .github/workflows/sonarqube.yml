@@ -1,0 +1,33 @@
+# SPDX-License-Identifier: MPL-2.0
+# This workflow is managed by gh actions-lock.
+# SonarQube Cloud (SonarCloud) static analysis. Analysis scope + exclusions live
+# in sonar-project.properties. Requires the SONAR_TOKEN repository secret
+# (Settings -> Secrets and variables -> Actions) and a SonarCloud project:
+# https://sonarcloud.io/project/overview?id=hyperpolymath_ZenodoDeposits.jl
+# Mirrors the boj-server arrangement.
+name: "🟡 CHECK: SonarQube"
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+jobs:
+  sonarqube:
+    name: SonarQube
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0   # full history for accurate new-code detection
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v8.2.1
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

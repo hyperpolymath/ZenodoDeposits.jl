@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# SPDX-License-Identifier: MPL-2.0
+# SPDX-FileCopyrightText: 2026 Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
+#
+# zenodo-deposit <dir> --metadata m.json [--sandbox|--production] [--publish --yes]
+# Thin launcher for ZenodoDeposits.CLI.main; see `zenodo-deposit --help`.
+set -euo pipefail
+here="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+exec julia --project="$here" --startup-file=no \
+  -e 'using ZenodoDeposits; exit(ZenodoDeposits.CLI.main(ARGS))' -- "$@"

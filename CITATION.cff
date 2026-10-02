@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Jewell"
+  given-names: "Jonathan"
+title: "ZenodoDeposits.jl"
+version: 0.1.0
+url: "https://github.com/hyperpolymath/ZenodoDeposits.jl"
+repository-code: "https://github.com/hyperpolymath/ZenodoDeposits.jl"
+license: MPL-2.0
+keywords:
+  - "zenodo"
+  - "doi"
+  - "research-data"
+  - "reproducibility"
+  - "julia"

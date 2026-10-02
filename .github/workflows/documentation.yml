@@ -1,0 +1,45 @@
+# SPDX-License-Identifier: MPL-2.0
+# This workflow is managed by gh actions-lock.
+# SPDX-FileCopyrightText: 2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>
+
+# Documenter build + (main-branch only) GitHub Pages deploy.
+# Flagship-rubric dimension 5 (Documentation). See docs/flagship-rubric.adoc.
+#
+# Per the estate required-check rule: no `on.*.paths` filter — this
+# workflow always runs so it is never stuck "Expected" on unrelated PRs.
+
+name: "🟡 CHECK: Documentation"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build docs (Documenter, with doctests)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+
+      - uses: julia-actions/setup-julia@v3.0.2
+        with:
+          version: '1.10'
+
+      - uses: julia-actions/cache@v3.3.0
+
+      - name: Build documentation (doctest=true)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DOCUMENTER_KEY: ${{ secrets.DOCUMENTER_KEY }}
+        run: julia --project=docs docs/make.jl

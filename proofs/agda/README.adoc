@@ -1,0 +1,26 @@
+// SPDX-License-Identifier: MPL-2.0
+= Agda proofs for the ZenodoDeposits journal
+
+`ZenodoDeposits/Journal.agda` proves safety properties of the journal state
+machine. `ZenodoDeposits/Transitions.agda` is generated from the Julia table
+`ZenodoDeposits.TRANSITIONS`, so the proofs are about that exact table. How the
+model maps onto the Julia code is described in link:CORRESPONDENCE.adoc[].
+
+== Toolchain
+
+* Agda 2.6.4.3 with agda-stdlib 2.1. These are Debian trixie's `agda` and
+  `agda-stdlib` packages, and CI uses them. Agda 2.7.0.1 with stdlib 2.1 also
+  typechecks the files.
+* Flags: `--safe --without-K`, set in `zenodo-deposits.agda-lib`. There are
+  no postulates.
+
+== Commands
+
+[source,sh]
+----
+julia --project proofs/agda/generate.jl   # regenerate Transitions.agda after editing src/transitions.jl
+proofs/agda/check.sh                      # typecheck (AGDA=/usr/bin/agda to pick a binary)
+----
+
+`check.sh` writes a project-local `libraries` file (gitignored) and passes it
+with `--library-file`. It never reads or changes `~/.agda`.

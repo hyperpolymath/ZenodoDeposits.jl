@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: MPL-2.0
+# Clade declaration — part of the gv-clade-index registry
+# See: https://github.com/hyperpolymath/gv-clade-index
+
+[identity]
+uuid = "42edd255-1f26-4d9c-8722-d83a71886f02"
+primary-forge = "github"
+primary-owner = "hyperpolymath"
+canonical-name = "ZenodoDeposits.jl"
+prefixed-name = "rm-ZenodoDeposits.jl"
+
+[clade]
+primary = "rm"
+secondary = ["gv"]
+assigned = "2026-10-02"
+rationale = "Julia library instantiated from rsr-julia-library-template-repo; clade inherited from the template, not yet registered in gv-clade-index."
+
+[forges]
+github = "hyperpolymath/ZenodoDeposits.jl"
+
+[lineage]
+type = "standalone"
+parent = "rsr-julia-library-template-repo (instantiated 2026-10-02); code extracted from MetaManifold-WebUI src/doi/"
+born = "2026-10-02"

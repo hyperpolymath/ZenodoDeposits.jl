@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: MPL-2.0
+# Toolchain for ZenodoDeposits.jl. CI tests Julia 1.10 (the compat floor) and
+# the current release; locally the current release is used. The Agda proofs
+# need Agda 2.6.4.3 + agda-stdlib 2.1 (Debian `agda agda-stdlib`), see
+# proofs/agda/README.adoc.
+[tools]
+julia = "1"
+just = "latest"

@@ -1,0 +1,51 @@
+# SPDX-License-Identifier: MPL-2.0
+# Copyright (c) 2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>
+#
+# STATE.a2ml — Project state checkpoint
+
+[metadata]
+project = "ZenodoDeposits.jl"
+version = "0.1.0"
+last-updated = "2026-10-02"
+status = "active"  # active | paused | archived
+
+[project-context]
+name = "ZenodoDeposits.jl"
+purpose = "Reproducible, resumable Zenodo deposits and DOI minting from Julia: validated bundles with checksums, a crash-safe two-phase journal (deposit!, then publish!), and Agda proofs that the journal never publishes twice."
+completion-percentage = 80
+
+[position]
+phase = "testing"         # design | implementation | testing | maintenance | archived
+maturity = "alpha"        # experimental | alpha | beta | production | lts
+
+[route-to-mvp]
+milestones = [
+  { name = "Extract generic deposit code from MetaManifold-WebUI src/doi/", completion = 100 },
+  { name = "Two-phase journal with write-ahead records and reconcile/recover", completion = 100 },
+  { name = "Mocked HTTP test suite (crash-resume, 429, redaction), Aqua, JET", completion = 100 },
+  { name = "Agda proofs generated from the Julia transition table", completion = 100 },
+  { name = "Live sandbox deposit test run with a real token", completion = 0 },
+  { name = "Registration in the General registry (owner decision)", completion = 0 },
+]
+
+[blockers-and-issues]
+issues = [
+  "Live Zenodo sandbox test has not been run: no sandbox token was available.",
+]
+
+[critical-next-actions]
+actions = [
+  "Run the opt-in live test: ZENODO_LIVE_TEST=1 with ZENODO_SANDBOX_TOKEN set.",
+  "Owner decides on General registry registration and the first tag.",
+]
+
+[maintenance-status]
+last-run-utc = "never"
+last-report = "docs/reports/maintenance/latest.json"
+last-result = "unknown"  # unknown | pass | warn | fail
+open-warnings = 0
+open-failures = 0
+
+[ecosystem]
+part-of = ["RSR Framework", "hyperpolymath Julia ecosystem"]
+depends-on = ["rsr-julia-library-template-repo"]
