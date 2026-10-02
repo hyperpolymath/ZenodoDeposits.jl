@@ -7,3 +7,19 @@ Changelog], and this project adheres to
 https://semver.org/spec/v2.0.0.html[Semantic Versioning].
 
 === [Unreleased]
+
+==== Added
+
+* `ZenodoDeposits.jl_chora.deed`: the repo deed at the root. It follows the deed
+  grammar and passes `deed_lint.py`, and holds identity, clade, lineage, meta,
+  ecosystem, agentic, neurosym, playbook, state and anchor facts.
+* CI job `no-a2ml` in `dogfood-gate.yml`: fails when any `.a2ml` file is tracked.
+
+==== Removed
+
+* Every `.a2ml` file (97), `.githooks/validate-a2ml.sh`, and the a2ml
+  pre-commit hook. Their facts moved into the repo deed.
+* `.machine_readable/arrival-pack/` and `.machine_readable/coaptation/`. `CLAUDE.md`
+  is now hand-authored. The `claude-md`, `coapt*` and `state-touch` recipes are gone.
+* The a2ml-paired contractiles and three unused composite actions
+  (`manifest-check`, `contractile-validation-check`, `semantic-audit-check`).

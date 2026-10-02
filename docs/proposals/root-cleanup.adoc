@@ -37,7 +37,7 @@ one-shot relocation PR per project once the template lands.
 The full enumeration lives in `.machine_readable/root-allow.txt`. Summary:
 
 * *Authority files (root):* `README.adoc`, `AUDIT.adoc`, `EXPLAINME.adoc`,
-  `0-AI-MANIFEST.a2ml` (thin pointer), `LICENSE`, `CHANGELOG.md`.
+  `CLAUDE.md`, the repo deed (`*_chora.deed`), `LICENSE`, `CHANGELOG.md`.
 * *Build entry points (root):* `Justfile`, `coordination.k9`.
 * *Tool-required dotfiles (root):* `.editorconfig`, `.envrc`, `.gitattributes`,
   `.gitignore`, `.tool-versions`.
@@ -161,19 +161,10 @@ across `Justfile`, `scripts/`, `.machine_readable/`).
 
 === AI manifest deduplication
 
-`.machine_readable/0.1-AI-MANIFEST.a2ml` is the canonical AI manifest in both
-the template and downstream repos (e.g. `the-nash-equilibrium` README line
-244). The root `0-AI-MANIFEST.a2ml` becomes a thin pointer:
-
-[source,a2ml]
-----
-# 0-AI-MANIFEST.a2ml — pointer file
-authority = ".machine_readable/0.1-AI-MANIFEST.a2ml"
-note = "AI agents MUST read the canonical manifest at the path above."
-----
-
-Once the canonical version is stable, decide whether to keep this pointer at
-root or delete it entirely.
+Superseded. The AI manifests have been removed along with A2ML. The agent
+entry point is `CLAUDE.md`, and agent permissions are in the `agentic` section
+of the repo deed (`ZenodoDeposits.jl_chora.deed`). Nothing remains to
+deduplicate.
 
 === Template-only relocations
 

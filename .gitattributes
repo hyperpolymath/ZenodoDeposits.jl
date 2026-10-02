@@ -19,7 +19,7 @@
 *.zig   text eol=lf
 *.idr   text eol=lf
 *.ipkg  text eol=lf
-*.a2ml  text eol=lf linguist-language=TOML
+*.deed  text eol=lf
 *.ncl   text eol=lf
 *.k9    text eol=lf linguist-language=Nickel
 

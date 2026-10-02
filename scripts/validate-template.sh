@@ -124,7 +124,6 @@ log_info "Phase 1: Core repository structure"
 echo ""
 
 # Root files
-check_file_exists "0-AI-MANIFEST.a2ml" "AI manifest (universal entry point)"
 check_file_exists "README.adoc" "High-level pitch"
 check_file_exists "EXPLAINME.adoc" "Developer deep-dive"
 check_file_exists "LICENSE" "License file"
@@ -147,11 +146,7 @@ echo ""
 log_info "Phase 2: Machine-readable metadata (.machine_readable/)"
 echo ""
 
-check_file_exists ".machine_readable/descriptiles/STATE.a2ml" "Project state"
-check_file_exists ".machine_readable/descriptiles/META.a2ml" "Architecture decisions"
-check_file_exists ".machine_readable/descriptiles/ECOSYSTEM.a2ml" "Ecosystem position"
-check_file_exists ".machine_readable/descriptiles/anchors/ANCHOR.a2ml" "Semantic boundary anchor"
-check_file_exists ".machine_readable/policies/MAINTENANCE-AXES.a2ml" "Maintenance axes"
+check_file_exists "$(basename "$REPO_ROOT")_chora.deed" "Repo deed (identity, state, ecosystem, anchor)"
 
 #==============================================================================
 # VALIDATION PHASE 3: REQUIRED WORKFLOWS (17 minimum)
@@ -243,7 +238,7 @@ if [ "$(basename "$REPO_ROOT")" = "rsr-template-repo" ]; then
     log_pass "Skipping placeholder check for template repo"
 else
     # Check that key files don't have unresolved placeholders
-    for file in "$REPO_ROOT/README.adoc" "$REPO_ROOT/Justfile" "$REPO_ROOT/.machine_readable/descriptiles/STATE.a2ml"; do
+    for file in "$REPO_ROOT/README.adoc" "$REPO_ROOT/Justfile" "$REPO_ROOT/$(basename "$REPO_ROOT")_chora.deed"; do
         if [ -f "$file" ]; then
             if has_placeholder "$file"; then
                 log_warning "File contains unresolved placeholders: $(basename "$file")"

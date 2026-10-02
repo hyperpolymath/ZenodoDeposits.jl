@@ -39,11 +39,14 @@ just doctor     # environment diagnostics
 
 === Machine-readable artefacts
 
-This repo carries `+.machine_readable/+` A2ML files (`+STATE.a2ml+`,
-`+META.a2ml+`, `+ECOSYSTEM.a2ml+`, `+AGENTIC.a2ml+`, `+NEUROSYM.a2ml+`,
-`+PLAYBOOK.a2ml+`). If your change alters project state, architecture,
-or operational steps, update the corresponding file in the same PR — CI
-validates them.
+The repo's machine-readable facts live in one file at the root,
+`+ZenodoDeposits.jl_chora.deed+`, with sections `+state+`, `+meta+`,
+`+ecosystem+`, `+agentic+`, `+neurosym+`, `+playbook+` and `+anchor+`. If your
+change alters project state, architecture, or operational steps, update the
+matching section in the same PR. `+deed_lint.py+` (in
+`+hyperpolymath/standards+`) validates the deed, and
+`+.githooks/validate-k9.sh+` validates the `+.k9+` checks under
+`+.machine_readable/self-validating/+`.
 
 === Language policy
 

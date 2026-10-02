@@ -55,8 +55,8 @@
 
                         ┌─────────────────────────────────────────┐
                         │          REPO INFRASTRUCTURE            │
-                        │  Justfile / Mustfile  .machine_readable/  │
-                        │  Codeowners / Reuse   0-AI-MANIFEST.a2ml  │
+                        │  Justfile            .machine_readable/ │
+                        │  Codeowners / Reuse  *_chora.deed       │
                         └─────────────────────────────────────────┘
 ```
 
@@ -67,7 +67,7 @@ COMPONENT                          STATUS              NOTES
 ─────────────────────────────────  ──────────────────  ─────────────────────────────────
 CORE STANDARDS
   ABI/FFI Standard (Idris2/Zig)     ██████████ 100%    Universal interface stable
-  AI Gatekeeper (0-AI-MANIFEST)     ██████████ 100%    Universal entry point active
+  Repo deed (*_chora.deed)          ██████████ 100%    Single machine-readable entry point
   TOPOLOGY.md Standard              ██████████ 100%    Visual summary guide active
   6SCM Metadata Structure           ██████████ 100%    Machine-readable state stable
 
@@ -85,10 +85,9 @@ CONTAINER ECOSYSTEM (Phase 2)
   k9-svc deployment (Nickel)        ██████████ 100%    Hunt-level deploy descriptor
   ct-build.sh pipeline              ██████████ 100%    Build/sign/verify script
   Justfile container-* recipes      ██████████ 100%    8 recipes integrated
-  Trustfile CONTAINER_SUPPLY_CHAIN  ██████████ 100%    Supply chain section added
 
 REPO INFRASTRUCTURE
-  .machine_readable/                ██████████ 100%    STATE/META/ECOSYSTEM active
+  Repo deed + .k9 checks            ██████████ 100%    state/meta/ecosystem in *_chora.deed
   Governance & License              ██████████ 100%    MPL-2.0 & Ethical use verified
   Development Shells (Guix)         ██████████ 100%    Reproducible env stable
 
@@ -102,7 +101,7 @@ OVERALL:                            ██████████ 100%    RSR T
 Philosophy ──────► RSR Standard ──────► Template Scaffolding ──► New Repo
      │                 │                      │                    │
      ▼                 ▼                      ▼                    ▼
-CCCP Policy ─────► 0-AI-MANIFEST ────────► Justfile ──────────► Compliance
+CCCP Policy ─────► Repo deed ────────────► Justfile ──────────► Compliance
                                               │
                                               ▼
                                       Container Ecosystem

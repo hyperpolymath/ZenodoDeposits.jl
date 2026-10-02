@@ -26,7 +26,6 @@ if git -C "$REPO_ROOT" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
         ':(exclude)scripts/check-no-vlang.sh' \
         ':(exclude)tests/workflows/check_no_vlang_test.sh' \
         ':(exclude).github/workflows/estate-rules.yml' \
-        ':(exclude)machine-readable/descriptiles/PLAYBOOK.a2ml' \
         2>/dev/null || true)
     V_MODS=$(git -C "$REPO_ROOT" ls-files -- 'v.mod' '**/v.mod' 2>/dev/null || true)
 else
@@ -37,7 +36,6 @@ else
         --exclude=check-no-vlang.sh \
         --exclude=check_no_vlang_test.sh \
         --exclude=estate-rules.yml \
-        --exclude=PLAYBOOK.a2ml \
         2>/dev/null || true)
     V_MODS=$(find "$REPO_ROOT" -type f -name v.mod \
         -not -path '*/.git/*' -not -path '*/affinescript/*' \

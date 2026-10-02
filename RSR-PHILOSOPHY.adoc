@@ -10,9 +10,9 @@ This document states the operating principles an agent or maintainer is expected
 to hold while doing work in any hyperpolymath repository. They are deliberately
 few, deliberately blunt, and meant to be applied — not admired.
 
-These principles are the human-readable home of the *Doctrine* that the estate
-arrival-pack projects into every repository's `CLAUDE.md`. The Doctrine list is
-the terse machine-facing summary; this file is the reasoning behind it. Where the
+These principles are the human-readable home of the *Doctrine* summarised at
+the top of every repository's `CLAUDE.md`. The Doctrine list is the terse
+machine-facing summary; this file is the reasoning behind it. Where the
 two differ, the canon (`hyperpolymath/standards`) and the owner's `manifesto`
 prevail.
 
@@ -66,9 +66,9 @@ were the cure, is itself a hole (see _always fail loudly_).
 == The full Doctrine
 
 The three above are the principles most often abused, but they sit inside the
-estate's full operating Doctrine. The canonical, always-current list is projected
-into the top of every repository's `CLAUDE.md` from
-`.machine_readable/arrival-pack/`. In summary it also holds: ground-truth by
+estate's full operating Doctrine. The canonical list is kept in
+`hyperpolymath/standards` and summarised at the top of every repository's
+`CLAUDE.md`. In summary it also holds: ground-truth by
 running the tool, not trusting status docs; distrust the neural for exactness
 (licences / invariants / equivalence belong to PLASMA, not an LLM); squabble,
 don't bypass (reach green by satisfying the gate, never by admin-override); no

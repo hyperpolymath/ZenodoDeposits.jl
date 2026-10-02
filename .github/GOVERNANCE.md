@@ -46,7 +46,7 @@ release schedules, contributor access, and community standards.
 - ADR statuses: `proposed`, `accepted`, `deprecated`, `superseded`, `rejected`.
 - ADRs provide a historical record of why decisions were made and what alternatives
   were considered.
-- See `.machine_readable/descriptiles/META.a2ml` for the machine-readable ADR index.
+- The machine-readable ADR index is the `meta` section of `ZenodoDeposits.jl_chora.deed`.
 
 ---
 
@@ -81,7 +81,7 @@ release schedules, contributor access, and community standards.
   standards enforcement.
 - Bot actions are subject to the same quality and review standards as human
   contributions.
-- Configure your bots in `.machine_readable/bot_directives/`.
+- Bot and agent permissions are in the `agentic` section of `ZenodoDeposits.jl_chora.deed`.
 
 ---
 

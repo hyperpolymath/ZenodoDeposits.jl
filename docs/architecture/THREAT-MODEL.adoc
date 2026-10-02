@@ -101,7 +101,7 @@ Brief description of ZenodoDeposits.jl and its architecture.
 |---------------------------------|-------------------|------------|--------|--------|------------------------------------------------|
 | Unlogged deployment             | Build artifacts    | Medium     | Medium | Medium | SLSA provenance; deployment audit trail        |
 | Denied merge of vulnerable code | Source code        | Low        | Medium | Low    | Git history is immutable; signed commits       |
-| Secret rotation without record  | CI/CD secrets      | Low        | Low    | Low    | Secret rotation logged in STATE.a2ml           |
+| Secret rotation without record  | CI/CD secrets      | Low        | Low    | Low    | None yet: rotation is not recorded anywhere   |
 
 ### Information Disclosure
 

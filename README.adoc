@@ -83,8 +83,8 @@ passed.
 Version 0.1.0, not registered. The code was extracted from MetaManifold-WebUI
 `src/doi/`, with everything MetaManifold-specific removed. The repository
 scaffolding comes from `rsr-julia-library-template-repo`. Some inherited
-estate files (`.machine_readable/contractiles/`, `EXPLAINME.adoc`,
-`AFFIRMATION.adoc`) still describe the template.
+estate files (`EXPLAINME.adoc`, `AFFIRMATION.adoc`) still describe the
+template.
 
 == Licence
 

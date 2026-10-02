@@ -18,13 +18,6 @@ repos:
       - id: check-added-large-files
         args: ['--maxkb=1024']
 
-  # --- A2ML manifest validation ---
-  - repo: https://github.com/hyperpolymath/a2ml-pre-commit
-    rev: 40adffc73f2d4be1e8dfda8a7de93e4fc11730dc  # a2ml-pre-commit @ main 2026-06-23
-    hooks:
-      - id: validate-a2ml
-        name: Validate A2ML manifests
-
   # --- K9 contract validation ---
   - repo: https://github.com/hyperpolymath/k9-pre-commit
     rev: 9b82e1f7a6b6c0f99df72c145d7dee8851803c30  # k9-pre-commit @ main 2026-06-23
@@ -50,13 +43,3 @@ repos:
     rev: v8.24.3
     hooks:
       - id: gitleaks
-
-  # --- Arrival pack drift: CLAUDE.md must stay in sync with a2ml ---
-  - repo: local
-    hooks:
-      - id: validate-claude-md
-        name: CLAUDE.md arrival pack in sync with a2ml
-        entry: bash .machine_readable/arrival-pack/verify.sh
-        language: system
-        pass_filenames: false
-        files: '^(\.machine_readable/descriptiles/.*|CLAUDE\.md)$'

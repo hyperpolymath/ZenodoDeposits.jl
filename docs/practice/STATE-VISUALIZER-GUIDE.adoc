@@ -44,7 +44,7 @@ The file must contain exactly three sections:
    - All external services (DNS, CDN, gateways) at the top
    - Application components in the middle
    - Data layer (databases, caches, queues) below
-   - Repo infrastructure (CI, contractiles, SCM files) at the bottom
+   - Repo infrastructure (CI, `.k9` checks, SCM files) at the bottom
    - Every box labelled, every connection labelled or obvious from context
    - The diagram should be BESPOKE to this project, not generic
 
@@ -129,7 +129,7 @@ Always 10 characters wide. Use full blocks only (no half-blocks).
 
 - Use the actual names from the codebase (file names, service names, tool names)
 - Group by architectural layer, not alphabetically
-- Include repo infrastructure (CI, contractiles, SCM files) as a layer
+- Include repo infrastructure (CI, `.k9` checks, SCM files) as a layer
 
 === When to update
 
@@ -143,12 +143,13 @@ Always 10 characters wide. Use full blocks only (no half-blocks).
 
 TOPOLOGY.md complements but does not replace:
 
-- **STATE.a2ml** — machine-readable state (tasks, blockers, next actions)
-- **ECOSYSTEM.a2ml** — position in the wider project ecosystem
-- **META.a2ml** — architecture decisions and design rationale
-- **0-AI-MANIFEST.a2ml** — AI agent entry point and invariants
+- **Repo deed `state` section** — machine-readable state (milestones, blockers, next actions)
+- **Repo deed `ecosystem` section** — position in the wider project ecosystem
+- **Repo deed `meta` section** — architecture decisions and design rationale
+- **`CLAUDE.md`** — AI agent entry point and invariants
 
-TOPOLOGY.md is the _visual summary_ for humans; the a2ml files are the
+The repo deed is `ZenodoDeposits.jl_chora.deed` at the repository root.
+TOPOLOGY.md is the _visual summary_ for humans; the deed is the
 _structured data_ for tooling. Both should agree.
 
 == Copyright

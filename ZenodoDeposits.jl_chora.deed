@@ -1,0 +1,137 @@
+;; SPDX-License-Identifier: MPL-2.0
+(repo-deed
+  :schema-version  "1.0.0"
+  :canonical-name  "ZenodoDeposits.jl"
+  :beholding-chora #u5"estate/chora"
+
+  :repo-uuid       #u5"github.com/metadatastician/ZenodoDeposits.jl"
+
+  (identity :primary-forge github
+            :owner          "metadatastician"
+            :prefixed-name  "rm-ZenodoDeposits.jl")
+
+  (clade    :primary       rm
+            :primary-name  "Repo Management & Tooling"
+            :secondary     (gv)
+            :assigned      "2026-10-02"
+            :rationale     "Julia library instantiated from rsr-julia-library-template-repo; clade inherited from the template, not yet registered in gv-clade-index.")
+
+  (forges   :github    "metadatastician/ZenodoDeposits.jl"
+            :gitlab    ""
+            :bitbucket "")
+
+  (lineage  :type              standalone
+            :parent            "MetaManifold-WebUI (code extracted from src/doi/)"
+            :born              "2026-10-02"
+            :previous-names    ()
+            :instantiated-from "rsr-julia-library-template-repo")
+
+  (status   :phase         active
+            :since         "2026-10-02"
+            :present       #t
+            :aliases       ()
+            :merged-into   ""
+            :superseded-by ""
+            :successors    ()
+            :ended         "")
+
+  (meta
+        :version       "0.1.0"
+        :last-updated  "2026-04-11"
+        :type          library
+        :languages     (julia)
+        :license       MPL-2.0
+        :author        "Jonathan D.A. Jewell (hyperpolymath)"
+        :build-tool        just
+        :container-runtime podman
+        :ci-platform       github-actions
+        :package-manager   guix
+        :scoping-first   #t
+        :execution-order  "axis-1 > axis-2 > axis-3"
+        :axis-1           "must > intend > like"
+        :axis-2  "corrective > adaptive > perfective"
+        :axis-3  "systems > compliance > effects"
+        (scoping
+          :sources            "README, roadmap, status docs, maintenance checklist, CI/security docs"
+          :marker-scan        "TODO/FIXME/XXX/HACK/STUB/PARTIAL"
+          :idris-unsound-scan "believe_me/assert_total")
+        :corrective-first  #t
+        :adaptive-second   #t
+        :adaptive-focus    "scope-change reconciliation, stale-reference removal, obsolete-work culling"
+        :perfective-third  #t
+        :perfective-source "axis-1 honest state after corrective/adaptive updates"
+        (axis-3
+          :audit-focus        "systems in place, documentation explains actual state, safety/security accounted for, observed effects reviewed"
+          :compliance-focus   "seams/compromises/exception register, bounded exceptions, anti-drift checks"
+          :drift-risk-example "single exception broadening into policy violation (e.g. ReScript->TypeScript spread)"
+          :effects-evidence   "benchmark execution/results and maintainer status dialogue/review")
+        (adr :id "ADR-001" :title "Julia library extracted from MetaManifold-WebUI src/doi; two-phase journal mirrored in Agda" :status accepted :date "2026-10-02")
+        (adr :id "ADR-002" :title "Aqua+JET wired into Pkg.test() via test/aqua.jl + test/jet.jl, not a separate CI step" :status accepted :date "2026-07-01")
+        (adr :id "ADR-003" :title "docs/flagship-rubric.adoc is the measuring-stick; Axiom.jl is the flagship reference instance" :status accepted :date "2026-07-01"))
+
+  (ecosystem
+             :project           "ZenodoDeposits.jl"
+             :ecosystem         "hyperpolymath"
+             :position-type     "library"
+             :purpose           "Generic Julia library for reproducible, resumable Zenodo deposits and DOI minting (deposition API v1)."
+             :not               ("MetaManifold-specific: no analysis store, web UI, DEED/Nickel or epistemic metadata (those stay in MetaManifold-WebUI)" "a general Zenodo API client: it covers create, upload, verify, publish and read-back of one deposition per journal" "registered in the General registry (not yet; an owner decision)")
+             :pipeline-position "library"
+             :chain             "rsr-julia-library-template-repo → ZenodoDeposits.jl → (MetaManifold-WebUI and other depositors)"
+             :pipeline-notes    "Code extracted from MetaManifold-WebUI src/doi/ (MetaManifold-specific parts stripped); MetaManifold-WebUI consumes it. External service: Zenodo deposition API v1 (zenodo.org, sandbox.zenodo.org)."
+             :coordination      standards
+             (related :name "rsr-julia-library-template-repo" :relationship minted-from :notes "Repository scaffolding this library was instantiated from."))
+
+  (agentic
+            :version "0.1.0" :last-updated "2026-04-11"
+            (permissions  :source         #t
+                          :tests          #t
+                          :docs           #t
+                          :config         #t
+                          :create-files   #t)
+            (integrity    :fail-closed                     #t
+                          :require-evidence-per-step       #t
+                          :allow-silent-skip               #f
+                          :require-rerun-after-fix         #t
+                          :release-claim-requires-hard-pass #t)
+            (methodology :instructions-dir "CLAUDE.md" :default-mode hybrid))
+
+  (neurosym
+             :version "0.1.0" :last-updated "2026-04-11"
+             (hypatia :scan-enabled  #t
+                      :scan-depth    standard
+                      :report-format "logtalk"))
+
+  (playbook
+            :version "0.1.0" :last-updated "2026-04-11"
+            (skeleton :version              "1.0"
+                      :last-updated         "2026-04-30"
+                      :authority-allowlist  ".machine_readable/root-allow.txt"
+                      :enforcement-workflow ".github/workflows/estate-rules.yml")
+            (deployment) (incident-response) (release-process) (docs-format) (maintenance-operations))
+
+
+  (state
+            :version               "0.1.0"
+            :last-updated          "2026-10-02"
+            :purpose               "Reproducible, resumable Zenodo deposits and DOI minting from Julia: validated bundles with checksums, a crash-safe two-phase journal (deposit!, then publish!), and Agda proofs that the journal never publishes twice."
+            :completion-percentage 80
+            :phase                 testing
+            :maturity              alpha
+            (milestone :name "Extract generic deposit code from MetaManifold-WebUI src/doi/" :completion 100)
+            (milestone :name "Two-phase journal with write-ahead records and reconcile/recover" :completion 100)
+            (milestone :name "Mocked HTTP test suite (crash-resume, 429, redaction), Aqua, JET" :completion 100)
+            (milestone :name "Agda proofs generated from the Julia transition table" :completion 100)
+            (milestone :name "Live sandbox deposit test run with a real token" :completion 0)
+            (milestone :name "Registration in the General registry (owner decision)" :completion 0)
+            :blockers              ("Live Zenodo sandbox test has not been run: no sandbox token was available.")
+            :next-actions          ("Run the opt-in live test: ZENODO_LIVE_TEST=1 with ZENODO_SANDBOX_TOKEN set."
+                                    "Owner decides on General registry registration and the first tag."))
+
+  (anchor
+            :authority    upstream-canonical
+            :kind         library
+            :one-sentence "turn a directory plus metadata into a checksummed bundle and deposit it to Zenodo with a resumable two-phase journal"
+            :domain       "research data publication"
+            (golden-path  :commands ("just test" "just quality")
+                          :success  ("Core tests pass" "Quality gates pass" "No unresolved critical security findings"))
+            (satellite-policy :must-pin-upstream #t :must-declare-authority #t)))
