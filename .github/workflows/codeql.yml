@@ -19,3 +19,8 @@ jobs:
   analyze:
     uses: hyperpolymath/standards/.github/workflows/codeql-reusable.yml@main
     secrets: inherit
+    with:
+      # CodeQL has no Julia extractor; the default (javascript-typescript)
+      # finds no source here and fails finalising an empty database.
+      # Analyse the workflows instead.
+      language: actions
