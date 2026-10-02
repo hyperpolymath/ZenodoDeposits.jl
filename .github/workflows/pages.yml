@@ -1,6 +1,13 @@
 # SPDX-License-Identifier: MPL-2.0
 # This workflow is managed by gh actions-lock.
-name: GitHub Pages (Ddraig SSG)
+#
+# Builds the Documenter site (docs/make.jl) and deploys it to GitHub Pages
+# via the Pages artifact flow. This is the ONLY Pages producer: Documenter's
+# `deploydocs` (which pushed an orphan `gh-pages` branch nothing served) is
+# not used. Julia comes from a digest-pinned container rather than
+# setup-julia so this workflow's `uses:` set — and its actions.lock entry —
+# stays {checkout, upload-pages-artifact, deploy-pages}.
+name: GitHub Pages (Documenter)
 on:
   push:
     branches: [main, master]
@@ -15,33 +22,24 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     container:
-      image: ghcr.io/stefan-hoeck/idris2-pack@sha256:f0758996a931fb35d9ecb1de273c4d59dabe2a09b433afc7e357f65a08b7e1ff
+      # julia:1.10 (multi-arch index digest, resolved 2026-10-02)
+      image: julia:1.10@sha256:238c8f5760477abfc0c8fd2828bbcbfa2a7f5510d11a26f1884a2fbfdb28b365
     steps:
+      # The julia image ships no git. Without it actions/checkout falls back
+      # to a tarball (no .git), and makedocs then refuses `repo =` outside a
+      # Git repository. Install it before checking out.
+      - name: Install git
+        run: apt-get update && apt-get install -y --no-install-recommends git ca-certificates
       - name: Checkout Site
         uses: actions/checkout@v7.0.1
-      - name: Checkout Ddraig SSG
-        uses: actions/checkout@v7.0.1
-        with:
-          repository: hyperpolymath/ddraig-ssg
-          path: .ddraig-ssg
-      - name: Compile Ddraig
-        working-directory: .ddraig-ssg
-        run: idris2 Ddraig.idr -o ddraig
-      - name: Build site
-        run: |
-          mkdir -p src
-          if [ ! -f src/index.md ] && [ -f README.md ]; then
-            cp README.md src/index.md
-          elif [ ! -f src/index.md ]; then
-            echo "# ${GITHUB_REPOSITORY}" > src/index.md
-          fi
-          ./.ddraig-ssg/build/exec/ddraig build src _site https://hyperpolymath.github.io/${GITHUB_REPOSITORY#*/}
+      - name: Build documentation (Documenter, doctest=true)
+        run: julia --project=docs docs/make.jl
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5.0.0
         with:
-          path: '_site'
+          path: 'docs/build'
   deploy:
     environment:
       name: github-pages
