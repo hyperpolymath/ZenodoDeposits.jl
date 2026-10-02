@@ -50,7 +50,6 @@ makedocs(;
         "Safety model" => "safety.md",
         "API" => "api.md",
     ],
-    warnonly = [:missing_docs, :cross_references],
 )
 
 if IS_CI

@@ -24,7 +24,8 @@ DOCS_DIR="$REPO_ROOT/docs"
 
 # Justified exceptions, relative to repo root. Empty by default.
 ALLOWED=()
-ALLOWED_DIRS=("docs/berrywiki/")
+# docs/src/: Documenter.jl only reads Markdown sources; it is the Julia docs toolchain.
+ALLOWED_DIRS=("docs/berrywiki/" "docs/src/")
 
 if [ ! -d "$DOCS_DIR" ]; then
     echo "PASS: no docs/ directory (nothing to check)"

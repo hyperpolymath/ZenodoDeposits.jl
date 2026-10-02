@@ -29,6 +29,9 @@ jobs:
   build:
     name: Build docs (Documenter, with doctests)
     runs-on: ubuntu-latest
+    # Documenter's deploydocs pushes the built site to gh-pages on main.
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v7.0.1
 
