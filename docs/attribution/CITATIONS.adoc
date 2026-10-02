@@ -11,26 +11,26 @@
   author = {Jewell, Jonathan},
   title = {ZenodoDeposits.jl},
   year = {2026},
-  url = {https://github.com/hyperpolymath/ZenodoDeposits.jl},
+  url = {https://github.com/metadatastician/ZenodoDeposits.jl},
   license = {MPL-2.0}
 }
 ----
 
 == Harvard Style
 
-Jewell, J. D. A. (2026) _ZenodoDeposits.jl_ [Computer software]. Available at: https://github.com/hyperpolymath/ZenodoDeposits.jl
+Jewell, J. D. A. (2026) _ZenodoDeposits.jl_ [Computer software]. Available at: https://github.com/metadatastician/ZenodoDeposits.jl
 
 == OSCOLA
 
-Jonathan D.A. Jewell, 'ZenodoDeposits.jl' (2026) <https://github.com/hyperpolymath/ZenodoDeposits.jl>
+Jonathan D.A. Jewell, 'ZenodoDeposits.jl' (2026) <https://github.com/metadatastician/ZenodoDeposits.jl>
 
 == MLA
 
-Jewell, Jonathan "ZenodoDeposits.jl." 2026, github.com/hyperpolymath/ZenodoDeposits.jl.
+Jewell, Jonathan "ZenodoDeposits.jl." 2026, github.com/metadatastician/ZenodoDeposits.jl.
 
 == APA 7
 
-Jewell, J. D. A. (2026). _ZenodoDeposits.jl_ [Computer software]. GitHub. https://github.com/hyperpolymath/ZenodoDeposits.jl
+Jewell, J. D. A. (2026). _ZenodoDeposits.jl_ [Computer software]. GitHub. https://github.com/metadatastician/ZenodoDeposits.jl
 
 == See Also
 

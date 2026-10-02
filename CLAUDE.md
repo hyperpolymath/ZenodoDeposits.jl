@@ -57,7 +57,7 @@ Deny: **Nix, Node/npm, TypeScript, Python, Go, AGPL**. (Guix, not Nix.)
 
 # This repo: `ZenodoDeposits.jl`  ·  clade `rm-ZenodoDeposits.jl`
 
-- **Identity** — uuid `01a0fbb6-a7fd-7c49-9121-20fcbc702696`; clade `rm` (secondary `gv`); born 2026-10-02; forge `hyperpolymath/ZenodoDeposits.jl`.
+- **Identity** — uuid `01a0fbb6-a7fd-7c49-9121-20fcbc702696`; clade `rm` (secondary `gv`); born 2026-10-02; forge `metadatastician/ZenodoDeposits.jl`.
 - **IS** — Generic Julia library for reproducible, resumable Zenodo deposits and DOI minting (deposition API v1).
 - **IS-NOT** — MetaManifold-specific: no analysis store, web UI, DEED/Nickel or epistemic metadata (those stay in MetaManifold-WebUI) · a general Zenodo API client: it covers create, upload, verify, publish and read-back of one deposition per journal · registered in the General registry (not yet; an owner decision)
 - **Where it sits** — pipeline position **library**; chain `rsr-julia-library-template-repo → ZenodoDeposits.jl → (MetaManifold-WebUI and other depositors)`; coordination = `standards`.

@@ -19,7 +19,7 @@ HTTP, JSON3, MD5, SHA
 
 [source,bash]
 ----
-git clone https://github.com/hyperpolymath/ZenodoDeposits.jl.git
+git clone https://github.com/metadatastician/ZenodoDeposits.jl.git
 cd ZenodoDeposits.jl
 julia --project -e "using Pkg; Pkg.instantiate(); Pkg.test()"
 ----
