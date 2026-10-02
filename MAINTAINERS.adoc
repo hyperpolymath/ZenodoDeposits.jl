@@ -12,6 +12,8 @@
 | Jonathan D.A. Jewell | Sole Maintainer | https://github.com/hyperpolymath[@hyperpolymath]
 |===
 
+The repository is owned by the https://github.com/metadatastician[metadatastician] GitHub organisation; the maintainer above acts for it.
+
 == Maintainer Responsibilities
 
 As the sole maintainer, all responsibilities apply to @hyperpolymath:
