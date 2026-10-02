@@ -14,13 +14,14 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
-  pages: write
-  id-token: write
 concurrency:
   group: "pages"
   cancel-in-progress: false
 jobs:
   build:
+    # Runs repository and package code: read-only token, no Pages/OIDC scopes.
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
     timeout-minutes: 30
     container:
@@ -34,6 +35,8 @@ jobs:
         run: apt-get update && apt-get install -y --no-install-recommends git ca-certificates
       - name: Checkout Site
         uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
       - name: Build documentation (Documenter, doctest=true)
         run: julia --project=docs docs/make.jl
       - name: Upload artifact
@@ -41,6 +44,9 @@ jobs:
         with:
           path: 'docs/build'
   deploy:
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
