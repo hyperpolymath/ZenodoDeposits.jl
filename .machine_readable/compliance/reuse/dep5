@@ -13,21 +13,6 @@ Files: .editorconfig .gitignore .gitattributes .tool-versions .mailmap
 Copyright: 2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>
 License: MPL-2.0
 
-# Machine-readable state files
-Files: .machine_readable/*.a2ml
-Copyright: 2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>
-License: MPL-2.0
-
-# Bot directives
-Files: .machine_readable/bot_directives/*
-Copyright: 2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>
-License: MPL-2.0
-
-# Contractiles
-Files: .machine_readable/contractiles/*
-Copyright: 2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>
-License: MPL-2.0
-
 # GitHub/CI configuration
 Files: .github/* .github/**/*
 Copyright: 2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>
@@ -55,8 +40,7 @@ License: MPL-2.0
 
 # Narrative documentation is CC-BY-SA-4.0 (estate Rule 1).
 # Placed last so it overrides the MPL-2.0 default for prose (.adoc/.md),
-# including the GitHub community-health .md files. Machine-readable .a2ml is a
-# different extension and stays MPL-2.0 per its stanza above.
+# including the GitHub community-health .md files.
 Files: *.adoc *.md
 Copyright: 2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>
 License: CC-BY-SA-4.0

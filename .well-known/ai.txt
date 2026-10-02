@@ -12,6 +12,6 @@ Disallow-Generation: yes
 # AI agents must NOT use this code for model training without explicit consent.
 #
 # For AI agent integration instructions, see:
-#   0-AI-MANIFEST.a2ml (universal AI entry point)
-#   AI.a2ml (Claude-specific instructions)
+#   CLAUDE.md (agent entry point)
+#   ZenodoDeposits.jl_chora.deed (repo deed: identity, state, agent permissions)
 #   .machine_readable/ (structured project state)

@@ -14,10 +14,6 @@ set shell := ["bash", "-uc"]
 set dotenv-load := true
 set positional-arguments := true
 
-# Import auto-generated contractile recipes (must-check, trust-verify, etc.)
-# Re-generate with: contractile gen-just
-import? "build/contractile.just"
-
 # Project metadata — customize these
 project := "ZenodoDeposits.jl"
 OWNER := "hyperpolymath"
@@ -52,7 +48,7 @@ info:
     @echo "Version: {{version}}"
     @echo "RSR Tier: {{tier}}"
     @echo "Recipes: $(just --summary | wc -w)"
-    @[ -f ".machine_readable/descriptiles/STATE.a2ml" ] && grep -oP 'phase\s*=\s*"\K[^"]+' .machine_readable/descriptiles/STATE.a2ml | head -1 | xargs -I{} echo "Phase: {}" || true
+    @grep -oP '^\s*:phase\s+\K\S+' ZenodoDeposits.jl_chora.deed | tail -1 | xargs -I{} echo "Phase: {}" || true
 
 # Run Invariant Path overlay tools for this repository
 invariant-path *ARGS:
@@ -303,34 +299,6 @@ deps-audit:
     @echo "Audit complete"
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# ARRIVAL PACK — agent-facing CLAUDE.md, compiled from a2ml
-# ═══════════════════════════════════════════════════════════════════════════════
-
-# Compile CLAUDE.md (the agent arrival pack) from this repo's a2ml
-claude-md:
-    @bash .machine_readable/arrival-pack/generate.sh
-
-# Fail if CLAUDE.md's generated region drifted from a2ml or was hand-edited
-validate-claude-md:
-    @bash .machine_readable/arrival-pack/verify.sh
-
-# ═══════════════════════════════════════════════════════════════════════════════
-# COAPTATION — typed descriptile↔contractile face-off (homeostasis reading)
-# ═══════════════════════════════════════════════════════════════════════════════
-
-# Emit the coaptation receipt: how the descriptiles coapt with the contractiles (SITREP)
-coapt:
-    @bash .machine_readable/coaptation/coapt.sh --report
-
-# Assemble a re-anchor basis IF the band is red (the drop itself is a human act)
-coapt-reanchor:
-    @bash .machine_readable/coaptation/coapt.sh --reanchor
-
-# Fail if the committed coaptation receipt drifted from the contractiles/descriptiles
-validate-coapt:
-    @bash .machine_readable/coaptation/verify.sh
-
-# ═══════════════════════════════════════════════════════════════════════════════
 # DOCUMENTATION
 # ═══════════════════════════════════════════════════════════════════════════════
 
@@ -431,16 +399,9 @@ import? "build/just/validate.just"
 # STATE MANAGEMENT
 # ═══════════════════════════════════════════════════════════════════════════════
 
-# Update STATE.a2ml timestamp
-state-touch:
-    @if [ -f ".machine_readable/descriptiles/STATE.a2ml" ]; then \
-        sed -i 's/last-updated = "[^"]*"/last-updated = "'"$(date +%Y-%m-%d)"'"/' .machine_readable/descriptiles/STATE.a2ml && \
-        echo "STATE.a2ml timestamp updated"; \
-    fi
-
-# Show current phase from STATE.a2ml
+# Show current phase from the repo deed
 state-phase:
-    @grep -oP 'phase\s*=\s*"\K[^"]+' .machine_readable/descriptiles/STATE.a2ml 2>/dev/null | head -1 || echo "unknown"
+    @grep -oP '^\s*:phase\s+\K\S+' ZenodoDeposits.jl_chora.deed | tail -1 || echo "unknown"
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # GUIX
@@ -462,7 +423,7 @@ guix-build:
 automate task="all":
     #!/usr/bin/env bash
     case "{{task}}" in
-        all) just fmt && just lint && just test && just docs && just state-touch ;;
+        all) just fmt && just lint && just test && just docs ;;
         cleanup) just clean && find . -name "*.orig" -delete && find . -name "*~" -delete ;;
         update) just deps && just validate ;;
         *) echo "Unknown: {{task}}. Use: all, cleanup, update" && exit 1 ;;

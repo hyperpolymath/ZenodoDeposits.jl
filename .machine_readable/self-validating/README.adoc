@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: CC-BY-SA-4.0
 // Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
-= K9 Contractiles
+= K9 Checks
 :toc: left
 :icons: font
 
-== What Are K9 Contractiles?
+== What Are K9 Components?
 
-K9 contractiles are self-validating components that combine configuration, validation, and deployment logic in a single file format. They implement the RSR principle of "self-describing artifacts" by embedding contracts and orchestration directly in the component.
+K9 components are self-validating files (Nickel with a `K9!` first line) that combine configuration, validation, and deployment logic in a single file format. They implement the RSR principle of "self-describing artifacts" by embedding contracts and orchestration directly in the component.
 
 == The Three Security Levels
 
@@ -19,7 +19,12 @@ K9 components declare their trust requirements using "The Leash" security model:
 
 == Example Components
 
-This directory contains example K9 contractiles for common repository tasks:
+This directory holds this repository's K9 checks (`methodology-guard.k9.ncl`,
+which checks agent work against the `agentic` section of
+`ZenodoDeposits.jl_chora.deed`), three templates, and example components for
+common repository tasks. `.githooks/validate-k9.sh` validates every `.k9` file.
+
+The examples:
 
 === Kennel Level (Pure Data)
 
@@ -72,20 +77,23 @@ Choose the appropriate security level for your use case:
 [source,bash]
 ----
 # Kennel: Pure configuration
-cp .machine_readable/contractiles/k9/examples/project-metadata.k9.ncl config/metadata.k9.ncl
+cp .machine_readable/self-validating/examples/project-metadata.k9.ncl config/metadata.k9.ncl
 
 # Yard: Validated configuration
-cp .machine_readable/contractiles/k9/examples/ci-config.k9.ncl .github/ci.k9.ncl
+cp .machine_readable/self-validating/examples/ci-config.k9.ncl .github/ci.k9.ncl
 
 # Hunt: Full automation
-cp .machine_readable/contractiles/k9/examples/setup-repo.k9.ncl scripts/setup.k9.ncl
+cp .machine_readable/self-validating/examples/setup-repo.k9.ncl scripts/setup.k9.ncl
 ----
 
 === 2. Validate Components
 
 [source,bash]
 ----
-# Validate Nickel syntax and contracts
+# Validate every K9 file in the repository
+.githooks/validate-k9.sh
+
+# Validate Nickel syntax and contracts of one file
 nickel typecheck config/metadata.k9.ncl
 
 # Verify Hunt-level signature (if signed)
@@ -109,11 +117,11 @@ nickel eval .github/ci.k9.ncl
 
 == Integration with RSR
 
-K9 contractiles integrate with other RSR standards:
+K9 components work with the repo deed, `ZenodoDeposits.jl_chora.deed`:
 
-**STATE.a2ml**:: K9 components can generate or validate STATE.a2ml
-**ECOSYSTEM.a2ml**:: K9 can automate cross-repo operations
-**META.a2ml**:: K9 can enforce architectural decisions
+**`state` section**:: K9 components can validate project state
+**`ecosystem` section**:: K9 can automate cross-repo operations
+**`meta` section**:: K9 can enforce architectural decisions (ADRs)
 
 == Security Best Practices
 
@@ -143,7 +151,7 @@ Use these as starting points for your own K9 components:
 
 == Dependencies
 
-To use K9 contractiles in your repository:
+To use K9 components in your repository:
 
 [source,bash]
 ----
@@ -167,7 +175,7 @@ git clone https://github.com/hyperpolymath/k9-svc.git
 
 == Contributing
 
-When adding K9 contractiles to your repository:
+When adding K9 components to your repository:
 
 1. Use appropriate security level (Kennel > Yard > Hunt)
 2. Document what each component does

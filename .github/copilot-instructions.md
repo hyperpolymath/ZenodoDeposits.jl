@@ -9,8 +9,8 @@ Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 
 ## Before Writing Code
 
-- Read `0-AI-MANIFEST.a2ml` in the repo root for canonical file locations.
-- State files (.a2ml) live in `.machine_readable/` ONLY, never the root.
+- Read `CLAUDE.md`, then the repo deed `ZenodoDeposits.jl_chora.deed`.
+- Repo facts live in the deed. Never create `.a2ml` files.
 
 ## License
 
@@ -53,8 +53,7 @@ Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
 - FFI implementations in Zig (`src/interface/ffi/`).
 - Generated C headers in `src/interface/generated/`.
 
-## State Files
+## Repo Facts
 
-Never create these in the repo root:
-STATE.a2ml, META.a2ml, ECOSYSTEM.a2ml, AGENTIC.a2ml, NEUROSYM.a2ml, PLAYBOOK.a2ml.
-They belong in `.machine_readable/` only.
+Identity, state, ecosystem and agent permissions live in the repo deed,
+`ZenodoDeposits.jl_chora.deed`. Never create `.a2ml` files.

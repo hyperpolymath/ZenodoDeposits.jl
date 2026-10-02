@@ -1,41 +1,11 @@
 // SPDX-License-Identifier: CC-BY-SA-4.0
 // Copyright (c) Jonathan D.A. Jewell <j.d.a.jewell@open.ac.uk>
-= Agent Instructions
-:toc: preamble
+= Bot directives: retired
 
-Methodology-aware configuration for AI agents. Read by any AI agent
-(Claude, Gemini, Copilot, etc.) at session start.
+The `.a2ml` bot directives (`methodology`, `coverage`, `debt`) have been
+removed. They held template defaults with nothing specific to this repository.
 
-== Files
+Agent permissions and integrity rules are in the `agentic` section of
+`ZenodoDeposits.jl_chora.deed`. Working notes for agents are in `CLAUDE.md`.
 
-[cols="1,3"]
-|===
-| File | Purpose
-
-| `methodology.a2ml`
-| Default mode, invariants, ring ceiling, priority weights, convergent budget
-
-| `coverage.a2ml`
-| Session coverage tracking — what was visited, what was skipped, what has MUSTs
-
-| `debt.a2ml`
-| Meander debt — things found but not fixed, carried between sessions
-|===
-
-== How Agents Use These
-
-1. Read `methodology.a2ml` at session start — know mode, invariants, ceiling
-2. Read `coverage.a2ml` — know what was visited last time, what was skipped
-3. Read `debt.a2ml` — know what's outstanding from previous sessions
-4. At session end, update `coverage.a2ml` and `debt.a2ml`
-
-== Relationship to Other Files
-
-* `AGENTIC.a2ml` says WHAT agents can do (permissions, gating)
-* `bot_directives/` says HOW agents should work (methodology)
-* `bot_directives/` says what the gitbot-fleet does (fleet-specific)
-* `CLAUDE.md` says how Claude specifically should work (Claude-specific)
-
-== Reference
-
-ADR-002 in `standards/agentic-a2ml/docs/ADR-002-methodology-layer.adoc`
+The last tree that held them: https://github.com/metadatastician/ZenodoDeposits.jl/tree/d2d4c2df2dcc5819ef7cfeb94d075db3acd242d3/.machine_readable/bot_directives
