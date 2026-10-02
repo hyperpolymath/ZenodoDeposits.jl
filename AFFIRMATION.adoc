@@ -114,7 +114,7 @@ file. Bring a counter-example, a failing run, or a contradicting source.
   outside the model.
 * *Not yet registered* in the Julia General registry, and not tagged.
 * *Estate CI checks still red at the anchor* are tracked on
-  https://github.com/hyperpolymath/ZenodoDeposits.jl/issues/3[#3]
+  https://github.com/metadatastician/ZenodoDeposits.jl/issues/3[#3]
   (lint-workflows, estate-audit, UUID v7 conformance, Julia nightly, OSSF
   Scorecard, SonarQube). None of these is part of the package's own test or
   proof run.
@@ -128,7 +128,7 @@ file. Bring a counter-example, a failing run, or a contradicting source.
 [cols="1,3"]
 |===
 | Project | ZenodoDeposits.jl
-| Repository | https://github.com/hyperpolymath/ZenodoDeposits.jl
+| Repository | https://github.com/metadatastician/ZenodoDeposits.jl
 | Commit (SHA) | a68b5852d149fea33739d791ab296791c228e66f (the code checked; the commit that lands this file changes only this file)
 | Branch | main
 | Timestamp (UTC) | 2026-10-02T15:15:02Z
