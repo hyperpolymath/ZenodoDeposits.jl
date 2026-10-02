@@ -14,13 +14,14 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
-  pages: write
-  id-token: write
 concurrency:
   group: "pages"
   cancel-in-progress: false
 jobs:
   build:
+    # Runs repository and package code: read-only token, no Pages/OIDC scopes.
+    permissions:
+      contents: read
     runs-on: ubuntu-latest
     timeout-minutes: 30
     container:
@@ -34,6 +35,14 @@ jobs:
         run: apt-get update && apt-get install -y --no-install-recommends git ca-certificates
       - name: Checkout Site
         uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      # The container runs as root but the checkout is owned by the runner uid,
+      # so git (incl. the Git_jll binary Documenter shells out to) rejects it as
+      # "dubious ownership" and `git rev-parse` exits 128. checkout only trusts
+      # the workspace while it runs, so trust it for the build too.
+      - name: Trust the workspace for git
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - name: Build documentation (Documenter, doctest=true)
         run: julia --project=docs docs/make.jl
       - name: Upload artifact
@@ -41,6 +50,9 @@ jobs:
         with:
           path: 'docs/build'
   deploy:
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
