@@ -52,10 +52,11 @@ rsr-template-repo/
 ├── ffi/zig/              # Zig FFI bridge (if applicable)
 ├── tests/                # Test suite
 ├── docs/                 # Documentation
-├── .machine_readable/    # Checkpoint files (STATE, META, ECOSYSTEM)
+├── .machine_readable/    # Policy and .k9 checks (self-validating/)
 ├── Justfile              # Task runner recipes
 ├── guix.scm              # Guix environment
-└── 0-AI-MANIFEST.a2ml    # AI agent entry point
+├── CLAUDE.md             # AI agent entry point
+└── *_chora.deed          # Repo deed: identity, state, meta, ecosystem
 ----
 
 == Key Recipes
@@ -79,9 +80,8 @@ just test           # All tests pass
 just panic-scan     # No new security issues
 ----
 
-== Contractile Invariants
+== Invariants
 
-Read `.machine_readable/MUST.contractile` before making changes.
 Key invariants that must never be violated:
 
 * Resuming the publication journal from any persisted state never creates a second deposition and never publishes twice (proved in `proofs/agda/`).
@@ -97,7 +97,7 @@ If using an AI assistant, load the warmup context first:
 just llm-context    # Outputs role-appropriate context
 ----
 
-Or read `0-AI-MANIFEST.a2ml` and `.claude/CLAUDE.md` directly.
+Or read `CLAUDE.md` and `ZenodoDeposits.jl_chora.deed` directly.
 
 == Get Help
 

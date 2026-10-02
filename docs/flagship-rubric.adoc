@@ -36,11 +36,11 @@ unsuppressed critical; registry name↔UUID/repo-slug agree.
 
 | A | Production | All of B green in CI across `[LTS, stable]`; property/fuzz
 tests where the domain admits them; maintenance axes documented; SPDX + licence
-correct; A2ML dogfood gate + estate-rules green.
+correct; repo deed valid; dogfood gate + estate-rules green.
 
 | ★ | Flagship | All of A, *plus*: verification claims formally honest (no
 overclaimed proofs; certificates truthfully labelled; FFI residuals audited via
-`assail-classifications.a2ml`); zero-warning build; and it is itself a
+a classifications registry); zero-warning build; and it is itself a
 *reference* others are measured against. `Axiom.jl` holds ★.
 |===
 
@@ -89,8 +89,8 @@ bar. `[auto]` = enforced by `just quality`; `[review]` = human/agent-judged
 
 === 6. Security & soundness `[auto]`
 * `panic-attack assail .` = 0 *unsuppressed* critical.
-* FFI/`unsafe` residuals are audited via `audits/assail-classifications.a2ml`
-  (TOML-A2ML conformant) + a companion `audits/audit-*.adoc` — suppressions are
+* FFI/`unsafe` residuals are audited via a classifications registry under
+  `audits/` + a companion `audits/audit-*.adoc` — suppressions are
   non-gameable (registry lives separately from the code under scan).
 * No MD5/SHA-1 for security (SHA-256+); HTTPS-only; no hardcoded secrets;
   SHA-pinned CI actions.
@@ -108,9 +108,9 @@ bar. `[auto]` = enforced by `just quality`; `[review]` = human/agent-judged
   soundness hole outranked by a feature.
 
 === 8. Estate compliance `[auto]` + `[review]`
-* A2ML substrate present and *valid TOML-A2ML* — dogfood gate `Validate A2ML
-  manifests` green (every `.a2ml` self-identifies; even a panic-attack
-  S-expression registry is TOML-A2ML-wrapped, per Axiom PR #52).
+* Repo deed (`*_chora.deed`) present and passing `deed_lint.py`; dogfood gate
+  green, including `Validate K9 contracts` for the `.k9` checks under
+  `.machine_readable/self-validating/`.
 * `estate-rules` green: no Python; AsciiDoc-by-default under `docs/` (except
   `docs/wiki/` + `docs/src/`); the banned legacy V language absent (Zig, its
   estate replacement, is allowed and encouraged).
@@ -120,7 +120,7 @@ bar. `[auto]` = enforced by `just quality`; `[review]` = human/agent-judged
 
 === 9. Maintenance & lifecycle `[review]`
 * Corrective / adaptive / perfective / preventive maintenance axes documented
-  (`.machine_readable/policies/MAINTENANCE-AXES.a2ml`) with a checklist.
+  (the `meta` section of the repo deed) with a checklist.
 * `CHANGELOG.md` current; ADRs under `docs/decisions/` for load-bearing choices.
 * Flagship bar: a living gap register; every "fixed" reaches "verified" via an
   independent adversarial pass before it counts.
@@ -147,8 +147,8 @@ quality:
     julia --project=docs docs/make.jl
     # 6      static analysis: 0 unsuppressed critical
     panic-attack assail . --output /tmp/assail.json
-    # 4,8    compat/registry + A2ML validity are enforced by CI gates
-    #        (registry ci/validate.jl; dogfood-gate Validate A2ML manifests)
+    # 4,8    compat/registry + deed/K9 validity are enforced by CI gates
+    #        (registry ci/validate.jl; dogfood-gate Validate K9 contracts)
     @echo "quality gates passed"
 
 test:

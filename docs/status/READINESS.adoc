@@ -40,19 +40,22 @@ evidence doesn't support the claim.
 *Evidence gates (v2.0 is stricter than v1.0):*
 
 * *D*: RSR-compliant + per-capability tests + documented scope. Test matrix
-  must cite counts and live in `.machine_readable/descriptiles/STATE.a2ml` or CI.
+  must cite counts and live in the `state` section of
+  `ZenodoDeposits.jl_chora.deed` or in CI.
 * *C*: All of D, plus active dogfooding in home context with *no known
   home-context failures over an evidence window*, plus *deep per-file and
   per-directory annotation* (purpose, boundaries, invariants,
   execution/test/proof surfaces, per-directory orientation READMEs).
-  STATE.a2ml `[dogfooding-status]` populated with concrete "done — <evidence>"
-  entries.
+  A `dogfooding-status` clause in the deed's `state` section holds concrete
+  "done — <evidence>" entries.
 * *B*: All of C, plus *six genuinely diverse external targets* with
-  feedback fed back. STATE.a2ml `[external-targets]` holds target identities
-  + dates + outcomes; `[issues-fed-back]` holds the closed-issue trail.
+  feedback fed back. An `external-targets` clause in the deed's `state` section
+  holds target identities + dates + outcomes; `issues-fed-back` holds the
+  closed-issue trail.
   Internal-capability items do *not* count.
 * *A*: All of B, plus multi-source real-world external feedback confirming
-  value, no harm in the wild. STATE.a2ml `[field-signal]` populated.
+  value, no harm in the wild. A `field-signal` clause in the deed's `state`
+  section is populated.
 
 *Publication gate:* non-abstract implementation claims require *B+*.
 Below B, any publication must be explicitly abstract or provisional.
@@ -65,7 +68,7 @@ Below B, any publication must be explicitly abstract or provisional.
 |===
 | Metric | Value | Source
 
-| Test count | _<N>_ | `.machine_readable/descriptiles/STATE.a2ml` or CI
+| Test count | _<N>_ | deed `state` section or CI
 | Formal-verification posture | _<N `believe_me` / `sorry` / `Admitted` — irreducible only>_ | grep of proof dirs
 | Dangerous patterns (`assert_total`, `unsafeCoerce`, `Obj.magic`) | _<N>_ | grep 2026-10-02
 | Per-unit README coverage | _<M/N (percentage)>_ | filesystem scan of unit dirs
@@ -113,8 +116,8 @@ CRG v2.0 requires two new pieces of evidence on top of D:
 ** Home context: _<what "home" means for this project>_.
 ** "No known failures" is a moving claim — must hold continuously across
    the evidence window (recommended: 4 weeks, daily use).
-** Populate `STATE.a2ml [dogfooding-status]` with one entry per capability:
-   `capability = "done — <concrete evidence>"`.
+** Add a `dogfooding-status` clause to the deed's `state` section with one
+   entry per capability: `:<capability> "done — <concrete evidence>"`.
 
 . *Deep code and folder annotation.*
 ** Per-directory orientation READMEs in every non-trivial source subtree.
@@ -142,21 +145,21 @@ component. Candidate diversity axes:
 * Different topology (star, mesh, peer-to-peer).
 * Different trust model (same-org, federated, adversarial).
 
-Populate `STATE.a2ml`:
+Add these clauses to the deed's `state` section:
 
-* `[external-targets]` — target-id → `"<date> — <outcome> — <contact/URL>"`.
-* `[issues-fed-back]` — issue-id → `"<date> — <external reporter> — <resolution>"`.
+* `external-targets` — target-id → `"<date> — <outcome> — <contact/URL>"`.
+* `issues-fed-back` — issue-id → `"<date> — <external reporter> — <resolution>"`.
 
 Six variations of the same use case do *not* count. Re-classify any items
-currently under `[grade-b-status]` (legacy) and move external-eligible ones
-into `[external-targets]`.
+currently under `grade-b-status` (legacy) and move external-eligible ones
+into `external-targets`.
 
 '''
 
 == 6. What's Needed for B → A
 
-Real-world external feedback confirming value. Populate
-`STATE.a2ml [field-signal]` with multi-source entries:
+Real-world external feedback confirming value. Add a `field-signal` clause to
+the deed's `state` section with multi-source entries:
 
 * External users beyond the six B-targets.
 * Third-party writeups, talks, papers, or testimonials.
@@ -179,8 +182,8 @@ Real-world external feedback confirming value. Populate
 * `docs/governance/CRG-AUDIT-<DATE>.adoc` — formal audit (populate from
   `rsr-template-repo/docs/governance/CRG-AUDIT-TEMPLATE.adoc`).
 * `docs/practice/DOGFOOD-LOG.adoc` — dated dogfood evidence (required for C).
-* `.machine_readable/descriptiles/STATE.a2ml` — authoritative state (canonical keys
-  `[dogfooding-status]`, `[external-targets]`, `[issues-fed-back]`,
-  `[field-signal]`).
+* `ZenodoDeposits.jl_chora.deed`, `state` section — authoritative state
+  (clauses `dogfooding-status`, `external-targets`, `issues-fed-back`,
+  `field-signal`).
 
 _Run `just crg-badge` to generate the shields.io badge for your README._

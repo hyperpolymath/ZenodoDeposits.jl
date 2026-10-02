@@ -8,7 +8,8 @@ Use this as a repeatable maintenance runbook for any repo.
 Companion policy:
 
 - `docs/practice/SOFTWARE-DEVELOPMENT-APPROACH.adoc` (human-readable)
-- `.machine_readable/policies/SOFTWARE-DEVELOPMENT-APPROACH.a2ml` (machine-readable)
+- the `meta` section of the repo deed (`*_chora.deed`), which records the
+  three-axis model and scoping rules (machine-readable)
 
 ## Canonical Repo Baseline (Final)
 
@@ -90,15 +91,14 @@ Run this pass at the end of a corrective/adaptive/perfective cycle:
 - [ ] Keep ownership/governance files present:
   - `MAINTAINER` in root
   - `.github/CODEOWNERS`
-- [ ] Keep machine-readable canonical structure under `.machine_readable/`:
-  - state/meta/ecosystem files (`*.a2ml` or repo standard)
-  - `anchors/ANCHOR.a2ml`
-  - `contractiles/` (`must`, `trust`, `intend`, and related)
-  - `ai/` for AI guidance files
-  - `bot_directives/` for bot control files
-- [ ] Keep contractiles/invariants present and wired:
-  - root `Mustfile` (or equivalent) with enforceable checks
-  - `Trustfile` and `Intentfile` present
+- [ ] Keep the repo deed (`*_chora.deed`) at the root and current:
+  - `state`, `meta` and `ecosystem` sections match the repo
+  - `anchor` section names the golden path
+  - `agentic` section records agent permissions
+  - passes `deed_lint.py`
+- [ ] Keep invariants present and wired:
+  - `.k9` checks under `.machine_readable/self-validating/` with enforceable checks
+  - `.githooks/validate-k9.sh` passes
 - [ ] Keep security metadata present:
   - `.well-known/security.txt` and relevant policy metadata
   - CI security scanning configured and runnable
@@ -412,10 +412,9 @@ Add these checks for language/compiler repositories with formal ABI/FFI constrai
 - [x] README structure restored (index/TOC, audience paths, quickstart sanity).
 - [x] Wiki split by audience (laypeople/users/developers) and linked from docs index.
 - [x] Root-level clutter reduced (archive, analysis, reports relegated to `docs/` subtrees).
-- [x] Machine-readable docs synchronized (`STATE.a2ml`, `META.a2ml`, `ECOSYSTEM.a2ml`, contractiles).
+- [x] Machine-readable docs synchronized (repo deed `state`, `meta`, `ecosystem` sections; `.k9` checks).
 - [x] Human-readable docs synchronized (`README`, `QUICK_STATUS`, roadmap, wiki home).
-- [x] `Mustfile` invariants present and enforceable in CI.
-- [x] `Trustfile` and `Intentfile` present and complete.
+- [x] `.k9` invariants present and enforceable in CI.
 - [x] FFI/ABI purity policy enforced (`*.zig` for FFI, `*.idr`/Idris2 for ABI).
 - [x] `panic-attack` findings triaged with explicit severity budget for release.
 - [x] Point-to-point, end-to-end, and benchmark checks wired in one quality gate.

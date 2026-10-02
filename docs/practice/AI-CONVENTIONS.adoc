@@ -11,13 +11,13 @@ Per-tool config files (.cursorrules, .clinerules, etc.) reference this document.
 
 ## Session Startup
 
-1. Read `0-AI-MANIFEST.a2ml` FIRST (mandatory gatekeeper).
-2. Read `.machine_readable/descriptiles/STATE.a2ml` for current status and blockers.
-3. Read `.machine_readable/descriptiles/anchors/ANCHOR.a2ml` for canonical authority boundaries.
-4. Read `.machine_readable/policies/MAINTENANCE-AXES.a2ml` for maintenance/audit sequencing.
-5. Read `.machine_readable/policies/MAINTENANCE-CHECKLIST.a2ml` for baseline controls.
-6. Read `.machine_readable/policies/SOFTWARE-DEVELOPMENT-APPROACH.a2ml` for execution order.
-7. Read `.machine_readable/descriptiles/AGENTIC.a2ml` for agent constraints.
+1. Read `CLAUDE.md` FIRST.
+2. Read the repo deed, `ZenodoDeposits.jl_chora.deed`, at the repository root:
+   - `state` for current status, blockers and next actions;
+   - `anchor` for canonical authority boundaries and the golden path;
+   - `meta` for maintenance/audit sequencing and execution order (the three axes);
+   - `agentic` for agent permissions and constraints.
+3. Read `docs/governance/MAINTENANCE-CHECKLIST.adoc` for baseline controls.
 
 ## License
 
@@ -44,10 +44,10 @@ Per estate policy (hyperpolymath/standards `LICENCE-POLICY.adoc` Rule 1 + Addend
 
 ## State Files
 
-State/metadata files, anchors, and policies (.a2ml) belong in `.machine_readable/` ONLY.
-NEVER create STATE.a2ml, META.a2ml, ECOSYSTEM.a2ml, AGENTIC.a2ml,
-NEUROSYM.a2ml, PLAYBOOK.a2ml, ANCHOR.a2ml, MAINTENANCE-AXES.a2ml,
-MAINTENANCE-CHECKLIST.a2ml, or SOFTWARE-DEVELOPMENT-APPROACH.a2ml in the repository root.
+Repository state, metadata, anchor and agent policy live in one file, the repo
+deed `ZenodoDeposits.jl_chora.deed`. Update the matching section there. Do not
+create separate per-topic state or metadata files. Machine-checked invariants
+are `.k9` files under `.machine_readable/self-validating/`.
 
 ## Banned Patterns
 
@@ -87,10 +87,9 @@ Use `just` (Justfile) for all build, test, lint, and format tasks.
 
 ## References
 
-- `0-AI-MANIFEST.a2ml` -- universal AI entry point
-- `.machine_readable/descriptiles/AGENTIC.a2ml` -- agent permissions and constraints
-- `.machine_readable/descriptiles/STATE.a2ml` -- current project state
-- `.machine_readable/descriptiles/anchors/ANCHOR.a2ml` -- canonical authority and policy boundary
-- `.machine_readable/policies/MAINTENANCE-AXES.a2ml` -- canonical axis sequencing and audit requirements
-- `.machine_readable/policies/MAINTENANCE-CHECKLIST.a2ml` -- baseline maintenance checklist policy
-- `.machine_readable/policies/SOFTWARE-DEVELOPMENT-APPROACH.a2ml` -- axis execution approach policy
+- `CLAUDE.md` -- AI agent entry point
+- `ZenodoDeposits.jl_chora.deed` `agentic` section -- agent permissions and constraints
+- `ZenodoDeposits.jl_chora.deed` `state` section -- current project state
+- `ZenodoDeposits.jl_chora.deed` `anchor` section -- canonical authority and policy boundary
+- `ZenodoDeposits.jl_chora.deed` `meta` section -- axis sequencing, scoping and execution order
+- `docs/governance/MAINTENANCE-CHECKLIST.adoc` -- baseline maintenance checklist

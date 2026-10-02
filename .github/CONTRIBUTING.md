@@ -33,10 +33,9 @@ ZenodoDeposits.jl/
 ├── examples/            # Examples (Perimeter 3)
 ├── spec/                # Spec tests (Perimeter 3)
 ├── tests/               # Test suite (Perimeter 2-3)
-├── .machine_readable/   # ALL machine-readable content (Perimeter 1)
-│   ├── *.a2ml           # State files (STATE, META, ECOSYSTEM, etc.)
-│   ├── bot_directives/  # Bot configs
-│   └── contractiles/    # Policy contracts (k9, dust, lust, must, trust)
+├── .machine_readable/   # Machine-readable policy and checks (Perimeter 1)
+│   └── self-validating/ # .k9 checks
+├── *_chora.deed         # Repo deed: identity, state, meta, ecosystem (Perimeter 1)
 ├── .well-known/         # Protocol files (Perimeter 1-3)
 ├── .github/             # GitHub config (Perimeter 1)
 │   ├── ISSUE_TEMPLATE/

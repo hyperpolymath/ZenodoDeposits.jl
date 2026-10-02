@@ -19,7 +19,7 @@ This repository provides the standardized structure, configuration, and tooling 
 
 * Bootstrap new projects with RSR compliance
 * Reference the standard directory structure
-* Copy configuration templates (Justfile, STATE.a2ml, etc.)
+* Copy configuration templates (Justfile, the repo deed, etc.)
 
 == Quick Start
 
@@ -65,7 +65,10 @@ just validate-rsr
 |RFC-compliant metadata (security.txt, ai.txt, humans.txt)
 
 |`.machine_readable/`
-|All machine-readable content: state files (6 a2ml), `bot_directives/`, `contractiles/`
+|Machine-readable policy and `.k9` checks (`self-validating/`)
+
+|`*_chora.deed`
+|Repo deed: identity, state, meta, ecosystem, agentic, neurosym, playbook, anchor
 
 |`docs/`
 |Documentation directory
@@ -97,11 +100,8 @@ just validate-rsr
 |`PLACEHOLDERS.md`
 |Template variable reference and replacement guide
 
-|`0-AI-MANIFEST.a2ml`
-|Universal AI agent entry point
-
-|`AI.a2ml`
-|Claude-specific instructions
+|`CLAUDE.md`
+|AI agent entry point and Claude-specific instructions
 
 |`src/interface/Abi/`
 |Idris2 ABI definitions (Types, Layout, Foreign)
@@ -121,7 +121,7 @@ The template Justfile provides:
 * **Cookbook generation**: `just cookbook` -> `docs/just-cookbook.adoc`
 * **Man page generation**: `just man` -> `docs/man/project.1`
 * **RSR validation**: `just validate-rsr`
-* **STATE.a2ml management**: `just state-touch`, `just state-phase`
+* **State**: `just state-phase` reads the phase from the repo deed
 * **Container support**: `just container-build`, `just container-push`
 * **CI matrix**: `just ci-matrix [stage] [depth]`
 
@@ -160,20 +160,8 @@ project/
 │   ├── ai.txt
 │   ├── humans.txt
 │   └── security.txt
-├── .machine_readable/         # ALL machine-readable content
-│   ├── STATE.a2ml             # Project state, progress, blockers
-│   ├── META.a2ml              # Architecture decisions, governance
-│   ├── ECOSYSTEM.a2ml         # Ecosystem position, relationships
-│   ├── AGENTIC.a2ml           # AI agent interaction patterns
-│   ├── NEUROSYM.a2ml          # Neurosymbolic integration config
-│   ├── PLAYBOOK.a2ml          # Operational runbook
-│   ├── bot_directives/        # Per-bot rules and constraints
-│   └── contractiles/          # Policy enforcement contracts
-│       ├── k9/                # Security levels (Kennel/Yard/Hunt)
-│       ├── dust/Dustfile      # Recovery and rollback
-│       ├── intend/Intentfile    # Future intent declarations
-│       ├── must/Mustfile      # Invariant checks
-│       └── trust/Trustfile.hs # Cryptographic verification
+├── .machine_readable/         # Machine-readable policy and checks
+│   └── self-validating/       # .k9 checks (Kennel/Yard/Hunt)
 ├── docs/                      # Documentation
 │   ├── CITATIONS.adoc
 │   ├── TOPOLOGY-GUIDE.adoc
@@ -198,8 +186,8 @@ project/
 ├── README.adoc                # Overview
 ├── TOPOLOGY.md                # Architecture + completion
 ├── PLACEHOLDERS.md            # Template variable guide
-├── 0-AI-MANIFEST.a2ml         # Universal AI entry point
-└── AI.a2ml                    # Claude-specific instructions
+├── CLAUDE.md                  # AI agent entry point
+└── <name>_chora.deed          # Repo deed: identity, state, meta, ecosystem
 ----
 
 == RSR Compliance
@@ -217,7 +205,7 @@ project/
 * `Justfile`
 * `README.adoc`
 * `LICENSE` (MPL-2.0)
-* `.machine_readable/descriptiles/STATE.a2ml`
+* `<name>_chora.deed` (repo deed)
 * `.well-known/security.txt`
 * `.well-known/ai.txt`
 * `.well-known/humans.txt`
@@ -232,37 +220,32 @@ project/
 * npm, Bun, pnpm, yarn (use Deno)
 * Go (use Rust)
 
-== STATE.a2ml
+== Repo deed
 
-The STATE.a2ml file tracks project state:
+The repo deed (`ZenodoDeposits.jl_chora.deed` here) is one s-expression file at
+the root. It follows the deed grammar (`hyperpolymath/standards`,
+`deed/spec/abnf/deed.abnf`) and is validated by `deed_lint.py`. Its `state`
+section tracks project state:
 
 [source]
 ----
-# STATE — Project State Checkpoint
-# Format: a2ml (AI-readable markup)
-
-project: v-graphql
-version: 0.1.0
-last-updated: 2026-02-14
-status: active
-
-phase: implementation
-maturity: beta
-
-ecosystem:
-  part-of: RSR Framework
-  depends-on: []
-
-milestones:
-  - name: Initial setup
-    completion: 100
-  - name: Core implementation
-    completion: 0
+(state
+          :version               "0.1.0"
+          :last-updated          "2026-10-02"
+          :phase                 testing
+          :maturity              alpha
+          (milestone :name "Two-phase journal with write-ahead records and reconcile/recover" :completion 100)
+          (milestone :name "Live sandbox deposit test run with a real token" :completion 0)
+          :blockers              ("Live Zenodo sandbox test has not been run: no sandbox token was available.")
+          :next-actions          ("Run the opt-in live test: ZENODO_LIVE_TEST=1 with ZENODO_SANDBOX_TOKEN set."))
 ----
+
+The other sections are `identity`, `clade`, `lineage`, `status`, `meta`
+(including ADRs), `ecosystem`, `agentic`, `neurosym`, `playbook` and `anchor`.
 
 == Badge Schema
 
-Generate badges from STATE.a2ml:
+Generate badges:
 
 [source,bash]
 ----
@@ -275,7 +258,7 @@ See `docs/BADGE_SCHEMA.adoc` for the full badge taxonomy.
 
 This template is part of:
 
-* **STATE.a2ml Ecosystem**: Conversation checkpoints
+* **Repo deeds**: per-repo machine-readable facts
 * **RSR Framework**: Repository standards
 * **Consent-Aware-HTTP**: .well-known compliance
 * **Hypatia**: Neurosymbolic security scanning

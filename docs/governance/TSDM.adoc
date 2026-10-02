@@ -25,4 +25,4 @@ TSDM is a three-dimensional governance framework designed for high-assurance, lo
 
 == Integration
 
-TSDM is the operational core of the Rhodium Standard. Every task in the `Justfile` and every state change in `STATE.a2ml` should be justifiable within this framework.
+TSDM is the operational core of the Rhodium Standard. Every task in the `Justfile` and every state change in the `state` section of the repo deed should be justifiable within this framework.
