@@ -1,6 +1,13 @@
 <!-- SPDX-License-Identifier: MPL-2.0 -->
 # API
 
+## Module
+
+```@docs
+ZenodoDeposits
+ZenodoDeposits.CLI
+```
+
 ## Bundles
 
 ```@docs
@@ -32,6 +39,7 @@ citation_cff
 Client
 DepositError
 RemoteError
+ZenodoDeposits.Secret
 ```
 
 ## State machine
@@ -39,4 +47,5 @@ RemoteError
 ```@docs
 transition
 TRANSITIONS
+ZenodoDeposits.STATES
 ```

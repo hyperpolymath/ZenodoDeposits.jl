@@ -579,7 +579,7 @@ status(s::AbstractDict) = Dict{String,Any}(k => s[k] for k in ("state", "environ
 """
     journal_state(journal) -> Symbol
 
-The journal's current state, one of [`STATES`](@ref).
+The journal's current state, one of [`STATES`](@ref ZenodoDeposits.STATES).
 """
 journal_state(j::Journal) = _state(_load(j))
 

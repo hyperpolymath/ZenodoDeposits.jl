@@ -52,7 +52,7 @@ There is deliberately no token argument. The token comes from
 `ZENODO_SANDBOX_TOKEN` (sandbox) or `ZENODO_TOKEN` (production) in `environ`,
 or else from the `password` of the `sandbox.zenodo.org` / `zenodo.org` entry
 in the netrc file (`\$NETRC`, default `~/.netrc`), which must not be group- or
-world-readable. The token is held in a [`Secret`](@ref) and redacted from
+world-readable. The token is held in a [`Secret`](@ref ZenodoDeposits.Secret) and redacted from
 `show` and from every error.
 
 `transport(method, url, headers, body)`, `sleeper(seconds)` and `clock()` are
