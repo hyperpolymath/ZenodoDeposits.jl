@@ -37,7 +37,7 @@ makedocs(;
     # bare template string, which only silences the *link-construction*
     # error but leaves the navbar-link URL undeterminable), so the local
     # build/doctest run works regardless of what `git remote -v` shows.
-    repo = Remotes.GitHub("hyperpolymath", "ZenodoDeposits.jl"),
+    repo = Remotes.GitHub("metadatastician", "ZenodoDeposits.jl"),
     format = Documenter.HTML(;
         prettyurls = IS_CI,
         edit_link = "main",

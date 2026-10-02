@@ -8,7 +8,7 @@
 // ── Licensing ───────────────────────────────────────────────────────────────
 image:https://img.shields.io/badge/Code-MPL--2.0-blue.svg?logo=mozilla[Code licence: MPL-2.0,link="https://opensource.org/licenses/MPL-2.0"]
 image:https://img.shields.io/badge/Docs-CC--BY--SA--4.0-blue.svg?logo=creativecommons[Docs licence: CC-BY-SA-4.0,link="https://creativecommons.org/licenses/by-sa/4.0/"]
-image:https://github.com/hyperpolymath/ZenodoDeposits.jl/actions/workflows/julia-test.yml/badge.svg?branch=main[Julia Test Gate,link="https://github.com/hyperpolymath/ZenodoDeposits.jl/actions/workflows/julia-test.yml"]
+image:https://github.com/metadatastician/ZenodoDeposits.jl/actions/workflows/julia-test.yml/badge.svg?branch=main[Julia Test Gate,link="https://github.com/metadatastician/ZenodoDeposits.jl/actions/workflows/julia-test.yml"]
 
 Reproducible, resumable Zenodo deposits and DOI minting from Julia (MPL-2.0).
 
@@ -47,7 +47,7 @@ See link:proofs/agda/README.adoc[proofs/agda].
 
 [source,julia]
 ----
-using Pkg; Pkg.add(url = "https://github.com/hyperpolymath/ZenodoDeposits.jl")
+using Pkg; Pkg.add(url = "https://github.com/metadatastician/ZenodoDeposits.jl")
 using ZenodoDeposits
 
 bundle  = write_checksums!(build_bundle("results/"; metadata = "metadata.json"))

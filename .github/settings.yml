@@ -14,7 +14,7 @@
 repository:
   name: "ZenodoDeposits.jl"
   description: "Reproducible, resumable Zenodo deposits and DOI minting from Julia (MPL-2.0)"
-  homepage: "https://github.com/hyperpolymath/ZenodoDeposits.jl"
+  homepage: "https://github.com/metadatastician/ZenodoDeposits.jl"
   private: false
   has_issues: true
   has_projects: true

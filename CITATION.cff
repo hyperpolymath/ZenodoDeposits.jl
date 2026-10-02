@@ -5,8 +5,8 @@ authors:
   given-names: "Jonathan"
 title: "ZenodoDeposits.jl"
 version: 0.1.0
-url: "https://github.com/hyperpolymath/ZenodoDeposits.jl"
-repository-code: "https://github.com/hyperpolymath/ZenodoDeposits.jl"
+url: "https://github.com/metadatastician/ZenodoDeposits.jl"
+repository-code: "https://github.com/metadatastician/ZenodoDeposits.jl"
 license: MPL-2.0
 keywords:
   - "zenodo"

@@ -29,7 +29,7 @@ The package is not registered. Install it from the repository:
 
 ```julia
 using Pkg
-Pkg.add(url = "https://github.com/hyperpolymath/ZenodoDeposits.jl")
+Pkg.add(url = "https://github.com/metadatastician/ZenodoDeposits.jl")
 ```
 
 Continue with the [Quickstart](@ref).
