@@ -18,11 +18,9 @@ using ZenodoDeposits
 
 DocMeta.setdocmeta!(ZenodoDeposits, :DocTestSetup, :(using ZenodoDeposits); recursive = true)
 
-# Deploying to GitHub Pages requires `GITHUB_TOKEN`/`DOCUMENTER_KEY` and a
-# real CI environment (git remote, `GITHUB_ACTIONS`, etc.). Guard it so a
-# local `julia --project=docs docs/make.jl` build/doctest run always
-# succeeds even outside CI: `deploydocs` is skipped unless we can detect
-# we're actually running inside GitHub Actions on this repo.
+# Deployment is not done here: `.github/workflows/pages.yml` uploads
+# `docs/build` through the GitHub Pages artifact flow. `IS_CI` only selects
+# pretty URLs, which need a web server and so are off for local builds.
 const IS_CI = get(ENV, "GITHUB_ACTIONS", "false") == "true"
 
 makedocs(;
@@ -51,10 +49,3 @@ makedocs(;
         "API" => "api.md",
     ],
 )
-
-if IS_CI
-    deploydocs(;
-        repo = "github.com/hyperpolymath/ZenodoDeposits.jl.git",
-        devbranch = "main",
-    )
-end

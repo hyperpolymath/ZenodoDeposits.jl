@@ -2,7 +2,8 @@
 # This workflow is managed by gh actions-lock.
 # SPDX-FileCopyrightText: 2026 Jonathan D.A. Jewell (hyperpolymath) <j.d.a.jewell@open.ac.uk>
 
-# Documenter build + (main-branch only) GitHub Pages deploy.
+# Documenter build + doctest check. Publishing is done by pages.yml (Pages
+# artifact flow); this workflow never pushes, so it needs read-only contents.
 # Flagship-rubric dimension 5 (Documentation). See docs/flagship-rubric.adoc.
 #
 # Per the estate required-check rule: no `on.*.paths` filter — this
@@ -12,8 +13,6 @@ name: "🟡 CHECK: Documentation"
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 on:
   push:
@@ -29,9 +28,6 @@ jobs:
   build:
     name: Build docs (Documenter, with doctests)
     runs-on: ubuntu-latest
-    # Documenter's deploydocs pushes the built site to gh-pages on main.
-    permissions:
-      contents: write
     steps:
       - uses: actions/checkout@v7.0.1
 
@@ -42,7 +38,4 @@ jobs:
       - uses: julia-actions/cache@v3.3.0
 
       - name: Build documentation (doctest=true)
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DOCUMENTER_KEY: ${{ secrets.DOCUMENTER_KEY }}
         run: julia --project=docs docs/make.jl
