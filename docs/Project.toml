@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: MPL-2.0
 [deps]
 Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
-ZenodoDeposits = "928c34ec-c44f-4801-ad1c-d3b833d76a91"
+ZenodoDeposits = "01a0fd25-08dc-75f2-9446-d9ab13218ca1"
 
 [compat]
 Documenter = "1"
